@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.infrastructure.database.orm import db, UserModel
+from app.infrastructure.database.orm import db, UserModel, ProductModel
 from app.controller.user import signup
 
 def create_app():
@@ -10,7 +10,10 @@ def create_app():
         endpoint=signup,
     )
     db.connect()
+
     UserModel.create_table()
+    ProductModel.create_table()
+
     return app
 
 app = create_app()
