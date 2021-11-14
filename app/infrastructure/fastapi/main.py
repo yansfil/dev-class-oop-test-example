@@ -7,7 +7,7 @@ def create_app():
     app.add_api_route(
         path="/user",
         methods=['POST'],
-        endpoint=signup
+        endpoint=signup,
     )
     db.connect()
     UserModel.create_table()
