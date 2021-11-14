@@ -9,6 +9,7 @@ def create_app():
         methods=['POST'],
         endpoint=signup,
     )
+    db.init(database="database.db")
     db.connect()
 
     UserModel.create_table()

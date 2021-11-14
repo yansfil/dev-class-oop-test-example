@@ -1,8 +1,10 @@
 from peewee import CharField, Model, SqliteDatabase, IntegerField
 
 # 참고 : https://github.com/coleifer/peewee
+# DB의 경로를 동적으로 넣어줘야함 https://docs.peewee-orm.com/en/latest/peewee/database.html#run-time-database-configuration
+db = SqliteDatabase(None)
 
-db = SqliteDatabase("database.db")
+
 
 
 class BaseModel(Model):
