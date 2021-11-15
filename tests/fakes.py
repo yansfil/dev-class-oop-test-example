@@ -16,3 +16,6 @@ class FakeUserRepository(AbstractRepository):
                 return model
         return None
 
+    def find_by_id(self, id: int):
+        ...
+

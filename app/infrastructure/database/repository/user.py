@@ -1,5 +1,6 @@
 import dataclasses
 from dataclasses import dataclass
+from typing import Optional
 
 from app.application.interfaces.user_repository import AbstractRepository
 from app.domain.user import User
@@ -7,12 +8,15 @@ from app.infrastructure.database.orm import UserModel
 
 
 class UserRepository(AbstractRepository):
-    def create(self, model: User):
+    def create(self, model: User) -> User:
         UserModel.create(name=model.name)
         return model
 
-    def find_one(self, model: User):
+    def find_one(self, model: User) -> Optional[User]:
         user = UserModel.select().where(UserModel.name == model.name).first()
         if user:
             return User(name=user.name)
         return None
+
+    def find_by_id(self, id: int) -> Optional[User]:
+        ...
