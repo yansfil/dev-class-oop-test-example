@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+
+from app.controller.product import find_product
 from app.infrastructure.database.orm import db, UserModel, ProductModel
 from app.controller.user import signup
 
@@ -9,6 +11,12 @@ def create_app():
         methods=['POST'],
         endpoint=signup,
     )
+    app.add_api_route(
+        path="/products/{product_id}",
+        methods=['GET'],
+        endpoint=find_product,
+    )
+
     db.init(database="database.db")
     db.connect()
 
