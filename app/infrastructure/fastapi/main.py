@@ -1,3 +1,4 @@
+import uvicorn
 from fastapi import FastAPI
 
 from app.controller.product import find_product
@@ -16,16 +17,20 @@ def create_app():
         methods=['GET'],
         endpoint=find_product,
     )
+    return app
 
+def initialize_db():
     db.init(database="database.db")
     db.connect()
 
     UserModel.create_table()
     ProductModel.create_table()
 
-    return app
+if __name__ == "__main__":
+    initialize_db()
+    app = create_app()
 
-app = create_app()
+    uvicorn.run(app, host="0.0.0.0", port=8000)
 
 # 실행 스크립트
 # python -m uvicorn app.infrastructure.fastapi.main:app --port 8000 --reload
